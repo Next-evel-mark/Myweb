@@ -1,211 +1,452 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>𝐍𝐞𝐱𝐭_𝐋𝐞𝐯𝐞𝐥_𝐌𝐚𝐫𝐤</title>
-<style>
-  /* Neon blue title */
-  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-  body {
-    background-color: #000;
-    color: white;
-    font-family: 'Share Tech Mono', monospace;
-    margin: 20px;
-    text-align: center;
-  }
-  h1 {
-    font-size: 3rem;
-    color: #00e5ff;
-    text-shadow:
-      0 0 5px #00e5ff,
-      0 0 10px #00b8f4,
-      0 0 20px #00a3e8,
-      0 0 40px #00e5ff;
-    letter-spacing: 0.3em;
-    user-select: none;
-  }
-  /* Scrolling pink motivational quote */
-  .marquee-container {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    border-top: 2px solid #ff49d1;
-    border-bottom: 2px solid #ff49d1;
-    margin: 20px 0;
-    height: 40px;
-    box-sizing: border-box;
-  }
-  .marquee-text {
-    display: inline-block;
-    padding-left: 100%;
-    animation: marquee 20s linear infinite;
-    font-size: 1.2rem;
-    color: #ff49d1;
-    text-shadow:
-      0 0 5px #ff49d1,
-      0 0 10px #db2dbf,
-      0 0 20px #f133d3,
-      0 0 40px #ff49d1;
-  }
-  @keyframes marquee {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-  }
-  /* Info section styling */
-  #info {
-    margin: 20px 0;
-    font-size: 1.1rem;
-  }
-  /* Table styling */
-  table {
-    margin: 0 auto 30px;
-    border-collapse: collapse;
-    width: 80%;
-    max-width: 600px;
-  }
-  th, td {
-    border: 2px solid #00e5ff;
-    padding: 10px 15px;
-    font-size: 1rem;
-  }
-  th {
-    background-color: #00334d;
-    color: #00e5ff;
-  }
-  td {
-    color: #00b8f4;
-  }
-  /* Weekend highlight */
-  .weekend {
-    background-color: #15002b;
-    color: #ff49d1;
-  }
-  /* Social badges container */
-  .social-container {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-bottom: 40px;
-  }
-  .social-badge {
-    display: flex;
-    align-items: center;
-    background-color: #111;
-    border: 2px solid #00e5ff;
-    border-radius: 25px;
-    padding: 8px 15px;
-    color: #00e5ff;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow:
-      0 0 10px #00e5ff,
-      0 0 20px #00b8f4;
-    user-select: none;
-    text-decoration: none;
-  }
-  .social-badge:hover {
-    background-color: #00e5ff;
-    color: #000;
-    box-shadow:
-      0 0 20px #ff49d1,
-      0 0 40px #ff49d1;
-  }
-  /* Icons */
-  .social-badge img {
-    height: 24px;
-    margin-right: 8px;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>𝐍𝐞𝐱𝐭_𝐋𝐞𝐯𝐞𝐥_𝐌𝐚𝐫𝐤 - Premium Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .title {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff4e8d, #8b00ff, #00c9ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(255, 78, 141, 0.5);
+            position: relative;
+            display: inline-block;
+            animation: shine 3s infinite alternate;
+        }
+        
+        @keyframes shine {
+            0% {
+                text-shadow: 0 0 10px rgba(255, 78, 141, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 30px rgba(255, 78, 141, 0.8), 0 0 60px rgba(139, 0, 255, 0.6);
+            }
+        }
+        
+        .info-bar {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 15px 30px;
+            display: inline-flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .services-container {
+            margin: 40px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #8b00ff;
+            text-shadow: 0 0 10px rgba(139, 0, 255, 0.5);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(30deg);
+            pointer-events: none;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.12);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff4e8d, #8b00ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .service-name {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #00c9ff;
+        }
+        
+        .service-btn {
+            background: linear-gradient(45deg, #ff4e8d, #8b00ff);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            width: 100%;
+        }
+        
+        .service-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 78, 141, 0.4);
+        }
+        
+        .hours-container {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            margin: 40px auto;
+            max-width: 600px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .hours-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #00c9ff;
+        }
+        
+        .hours-list {
+            list-style: none;
+            font-size: 1.2rem;
+        }
+        
+        .hours-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .highlight {
+            color: #ff4e8d;
+            font-weight: bold;
+        }
+        
+        .social-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp {
+            background: linear-gradient(45deg, #25D366, #128C7E);
+        }
+        
+        .instagram {
+            background: linear-gradient(45deg, #833AB4, #FD1D1D, #FCB045);
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .battery-level {
+            width: 60px;
+            height: 30px;
+            border: 2px solid white;
+            border-radius: 5px;
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+        }
+        
+        .battery-level::after {
+            content: '';
+            position: absolute;
+            top: 7px;
+            right: -6px;
+            width: 4px;
+            height: 14px;
+            background: white;
+            border-radius: 0 2px 2px 0;
+        }
+        
+        .battery-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff4e8d, #8b00ff);
+            border-radius: 3px;
+        }
+        
+        /* Animation for new service */
+        @keyframes pop-in {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .new-service {
+            animation: pop-in 0.5s ease-out;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 3rem;
+            }
+            
+            .info-bar {
+                flex-direction: column;
+                gap: 15px;
+                border-radius: 20px;
+                padding: 15px;
+            }
+            
+            .social-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<h1>𝐍𝐞𝐱𝐭_𝐋𝐞𝐯𝐞𝐥_𝐌𝐚𝐫𝐤</h1>
-
-<div class="marquee-container" aria-label="Motivational quote about technology">
-  <div class="marquee-text">
-    "Technology is best when it brings people together and pushes humanity to the next level of innovation, creativity, and connection."
-  </div>
-</div>
-
-<div id="info">
-  <div>Local Time: <span id="local-time">Loading...</span></div>
-  <div>Local IP: <span id="local-ip">Fetching...</span></div>
-  <div>Battery: <span id="battery-level">Detecting...</span></div>
-</div>
-
-<table>
-  <thead>
-    <tr>
-      <th>Day</th>
-      <th>Open Times</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>Monday</td><td>10:30 AM - 5:20 PM<br>10:20 PM - 11:00 PM</td></tr>
-    <tr><td>Tuesday</td><td>10:30 AM - 5:20 PM<br>10:20 PM - 11:00 PM</td></tr>
-    <tr><td>Wednesday</td><td>10:30 AM - 5:20 PM<br>10:20 PM - 11:00 PM</td></tr>
-    <tr><td>Thursday</td><td>10:30 AM - 5:20 PM<br>10:20 PM - 11:00 PM</td></tr>
-    <tr><td>Friday</td><td>10:30 AM - 5:20 PM<br>10:20 PM - 11:00 PM</td></tr>
-    <tr class="weekend"><td>Saturday</td><td>8:00 AM - 10:00 PM</td></tr>
-    <tr class="weekend"><td>Sunday</td><td>8:00 AM - 10:00 PM</td></tr>
-  </tbody>
-</table>
-
-<div class="social-container">
-  <a class="social-badge" href="https://wa.me/254110550356" target="_blank" rel="noopener" aria-label="Contact us on WhatsApp">
-    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp icon" /> WhatsApp
-  </a>
-  <a class="social-badge" href="https://instagram.com/next_level_mark" target="_blank" rel="noopener" aria-label="Follow us on Instagram">
-    <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram icon" /> Instagram
-  </a>
-  <a class="social-badge" href="https://t.me/𝑹𝒊𝒌𝒐 𝑩𝒐𝒚" target="_blank" rel="noopener" aria-label="Join us on Telegram">
-    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram icon" /> Telegram
-  </a>
-</div>
-
-<script>
-// Update local time every second
-function updateTime() {
-  const timeElem = document.getElementById('local-time');
-  const now = new Date();
-  timeElem.textContent = now.toLocaleTimeString();
-}
-setInterval(updateTime, 1000);
-updateTime();
-
-// Fetch local IP using a public API
-async function fetchLocalIP() {
-  const ipElem = document.getElementById('local-ip');
-  try {
-    // This fetches the public IP; local IP requires advanced method and permissions
-    const response = await fetch('https://api.ipify.org?format=json');
-    const data = await response.json();
-    ipElem.textContent = data.ip;
-  } catch {
-    ipElem.textContent = 'Unavailable';
-  }
-}
-fetchLocalIP();
-
-// Battery status
-async function updateBattery() {
-  const batteryElem = document.getElementById('battery-level');
-  if (navigator.getBattery) {
-    const battery = await navigator.getBattery();
-    function updateLevel() {
-      batteryElem.textContent = Math.round(battery.level * 100) + '%';
-    }
-    updateLevel();
-    battery.addEventListener('levelchange', updateLevel);
-  } else {
-    batteryElem.textContent = 'Battery API not supported';
-  }
-}
-updateBattery();
-</script>
-
+    <div class="container">
+        <header>
+            <h1 class="title">Next_Level_Mark</h1>
+            <div class="info-bar">
+                <div class="info-item">
+                    <i class="fas fa-battery-three-quarters"></i>
+                    <span>Battery: </span>
+                    <div class="battery-level">
+                        <div class="battery-fill" id="battery-fill"></div>
+                    </div>
+                    <span id="battery-percent">85%</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Time: </span>
+                    <span id="current-time">Loading...</span>
+                </div>
+            </div>
+        </header>
+        
+        <div class="services-container">
+            <h2 class="section-title">Our Premium Services</h2>
+            <div class="services-grid" id="services-grid">
+                <!-- Services will be added here dynamically -->
+            </div>
+            
+            <div class="hours-container">
+                <h3 class="hours-title">Opening Hours</h3>
+                <ul class="hours-list">
+                    <li>Monday - Friday: <span class="highlight">10:00 AM - 6:00 PM</span></li>
+                    <li>Monday - Friday: <span class="highlight">9:10 PM - 12:00 AM</span></li>
+                    <li>Saturday - Sunday: <span class="highlight">By Appointment Only</span></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="social-container">
+            <a href="#" class="social-btn whatsapp">
+                <i class="fab fa-whatsapp"></i>
+                WhatsApp Us
+            </a>
+            <a href="#" class="social-btn instagram">
+                <i class="fab fa-instagram"></i>
+                Follow on Instagram
+            </a>
+        </div>
+        
+        <footer>
+            <p>© Mark <span id="current-year"></span> | Premium Services at Lightning Speed</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            document.getElementById('current-time').textContent = timeString;
+        }
+        
+        // Update battery status (simulated for demonstration)
+        function updateBattery() {
+            // In a real implementation, you would use the Battery Status API
+            // This is a simulation for demo purposes
+            const batteryLevel = Math.floor(Math.random() * 30) + 70; // Random between 70-100%
+            document.getElementById('battery-percent').textContent = `${batteryLevel}%`;
+            document.getElementById('battery-fill').style.width = `${batteryLevel}%`;
+        }
+        
+        // Set current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Initial services
+        const services = [
+            { name: "Digital Marketing", icon: "fa-bullhorn" },
+            { name: "Web Development", icon: "fa-code" },
+            { name: "SEO Optimization", icon: "fa-chart-line" },
+            { name: "Social Media Management", icon: "fa-hashtag" },
+            { name: "Brand Strategy", icon: "fa-chess-queen" },
+            { name: "Content Creation", icon: "fa-pen-fancy" }
+        ];
+        
+        // Render services
+        function renderServices() {
+            const servicesGrid = document.getElementById('services-grid');
+            servicesGrid.innerHTML = '';
+            
+            services.forEach(service => {
+                const serviceCard = document.createElement('div');
+                serviceCard.className = 'service-card';
+                serviceCard.innerHTML = `
+                    <div class="service-icon">
+                        <i class="fas ${service.icon}"></i>
+                    </div>
+                    <h3 class="service-name">${service.name}</h3>
+                    <button class="service-btn">Learn More</button>
+                `;
+                servicesGrid.appendChild(serviceCard);
+            });
+        }
+        
+        // Add new service (simulating adding a new service)
+        function addNewService(name, icon) {
+            services.push({ name, icon });
+            
+            // Re-render services with animation for the new one
+            renderServices();
+            
+            // Animate the last card (the new one)
+            const cards = document.querySelectorAll('.service-card');
+            if (cards.length > 0) {
+                cards[cards.length - 1].classList.add('new-service');
+            }
+        }
+        
+        // Initialize the page
+        function init() {
+            updateTime();
+            updateBattery();
+            renderServices();
+            
+            // Update time every minute
+            setInterval(updateTime, 60000);
+            
+            // Update battery every 30 seconds (simulation)
+            setInterval(updateBattery, 30000);
+            
+            // Simulate adding a new service after 3 seconds (for demo)
+            setTimeout(() => {
+                addNewService("E-commerce Solutions", "fa-shopping-cart");
+            }, 3000);
+        }
+        
+        // Start the application
+        window.onload = init;
+    </script>
 </body>
 </html>
