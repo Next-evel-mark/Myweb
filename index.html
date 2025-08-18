@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXT_LEVEL_MARK</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin: 20px 0;
+            background: linear-gradient(90deg, #ff8a00, #e52e71, #4a00e0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(255,255,255,0.3);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+            100% { text-shadow: 0 0 20px rgba(255,255,255,0.7), 0 0 30px rgba(255,138,0,0.5); }
+        }
+        
+        .info-container {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 30px auto;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 1.1rem;
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #ff8a00;
+        }
+        
+        .info-value {
+            font-weight: 700;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .scrolling-text {
+            white-space: nowrap;
+            overflow: hidden;
+            margin: 40px auto;
+            padding: 20px;
+            background: rgba(229, 46, 113, 0.2);
+            border-radius: 50px;
+            max-width: 90%;
+            box-shadow: 0 5px 15px rgba(229, 46, 113, 0.3);
+            border: 1px solid rgba(229, 46, 113, 0.3);
+        }
+        
+        .scrolling-text p {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll 25s linear infinite;
+            font-size: 1.3rem;
+            color: #ff8aee;
+            font-weight: 600;
+            text-shadow: 0 0 5px rgba(255,138,238,0.5);
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            margin-top: 50px;
+        }
+        
+        .nav-button {
+            background: linear-gradient(45deg, #e52e71, #ff8a00);
+            color: white;
+            border: none;
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            width: 280px;
+            transition: all 0.4s;
+            box-shadow: 0 8px 25px rgba(229, 46, 113, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff8a00, #e52e71);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(229, 46, 113, 0.6);
+        }
+        
+        .nav-button:hover::before {
+            opacity: 1;
+        }
+        
+        .nav-button span {
+            display: block;
+            font-size: 0.95rem;
+            margin-top: 8px;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        
+        .page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f0c29, #302b63);
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            z-index: 100;
+        }
+        
+        .page h2 {
+            color: #ff8a00;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px rgba(255, 138, 0, 0.5);
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .close-btn:hover {
+            background: rgba(229, 46, 113, 0.5);
+            transform: rotate(90deg);
+        }
+        
+        .bio-text {
+            margin: 0 auto;
+            max-width: 700px;
+            text-align: left;
+            line-height: 1.8;
+        }
+        
+        .bio-text p {
+            margin: 25px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s;
+            color: white;
+            font-size: 1.1rem;
+            padding-left: 20px;
+            border-left: 3px solid #e52e71;
+        }
+        
+        .bio-text p.visible {
+            opacity: 1;
+            transform: translateY(0);
+            color: #4a8fe7;
+            border-left: 3px solid #ff8a00;
+        }
+        
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px auto;
+            max-width: 900px;
+        }
+        
+        .project-btn {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            padding: 25px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.4s;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.5s;
+        }
+        
+        .project-btn:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(74, 143, 231, 0.2);
+        }
+        
+        .project-btn:hover::before {
+            left: 100%;
+        }
+        
+        .project-btn span {
+            display: block;
+            font-size: 0.9rem;
+            margin-top: 12px;
+            opacity: 0.8;
+        }
+        
+        .socials-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 40px auto;
+            max-width: 450px;
+        }
+        
+        .social-btn {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.4s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .instagram { background: linear-gradient(45deg, #405DE6, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737); }
+        .whatsapp { background: linear-gradient(45deg, #25D366, #128C7E); }
+        .telegram { background: linear-gradient(45deg, #0088cc, #34AADF); }
+        .facebook { background: linear-gradient(45deg, #3b5998, #4267B2); }
+        
+        footer {
+            margin-top: 70px;
+            padding: 25px;
+            color: rgba(255,255,255,0.6);
+            font-size: 1rem;
+        }
+        
+        footer a {
+            color: #ff8a00;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        footer a:hover {
+            color: #e52e71;
+            text-shadow: 0 0 10px rgba(255,138,0,0.5);
+        }
+        
+        #black-screen {
+            background-color: #000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        #black-screen p {
+            color: white;
+            font-size: 1.5rem;
+            margin-top: 20px;
+            text-align: center;
+            max-width: 80%;
+            line-height: 1.6;
+        }
+        
+        #black-screen button {
+            background: linear-gradient(45deg, #e52e71, #ff8a00);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            margin-top: 40px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(229, 46, 113, 0.4);
+        }
+        
+        #black-screen button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(229, 46, 113, 0.6);
+        }
+        
+        /* Battery animation */
+        .battery-animation {
+            display: inline-block;
+            width: 20px;
+            height: 10px;
+            border: 2px solid white;
+            border-radius: 3px;
+            position: relative;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        
+        .battery-animation::after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: 2px;
+            width: 3px;
+            height: 6px;
+            background: white;
+            border-radius: 0 2px 2px 0;
+        }
+        
+        .battery-level {
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            bottom: 1px;
+            background: #25D366;
+            border-radius: 1px;
+            animation: batteryPulse 2s infinite;
+        }
+        
+        @keyframes batteryPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* IP address animation */
+        .ip-address {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .ip-address::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #ff8a00, #e52e71);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: ipUnderline 3s infinite;
+        }
+        
+        @keyframes ipUnderline {
+            0%, 100% { transform: scaleX(0); }
+            50% { transform: scaleX(1); }
+        }
+        
+        /* Date time animation */
+        .datetime-value {
+            position: relative;
+        }
+        
+        .datetime-value::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            animation: datetimeBorder 4s infinite linear;
+            pointer-events: none;
+        }
+        
+        @keyframes datetimeBorder {
+            0% { border-color: rgba(255,138,0,0); transform: scale(1); }
+            25% { border-top-color: #ff8a00; }
+            50% { border-right-color: #e52e71; transform: scale(1.02); }
+            75% { border-bottom-color: #4a00e0; }
+            100% { border-left-color: #4a8fe7; border-color: rgba(74,143,231,0); transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+    
+    <h1>𝐍𝐄𝐗𝐓_𝐋𝐄𝐕𝐄𝐋_𝐌𝐀𝐑𝐊</h1>
+    
+    <div class="info-container">
+        <div class="info-item">
+            <span class="info-label">Battery Status:</span>
+            <span class="info-value" id="battery">Loading...
+                <span class="battery-animation"><span class="battery-level" id="battery-level"></span></span>
+            </span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Local IP:</span>
+            <span class="info-value ip-address" id="ip">Detecting...</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Date & Time:</span>
+            <span class="info-value datetime-value" id="datetime">Loading...</span>
+        </div>
+    </div>
+    
+    <div class="scrolling-text">
+        <p>𝐈 𝐚𝐦 𝐚 𝐆𝐨𝐝 𝐟𝐞𝐚𝐫𝐢𝐧𝐠 𝐲𝐨𝐮𝐧𝐠 𝐦𝐚𝐧 𝐡𝐢𝐠𝐡𝐥𝐲 𝐩𝐚𝐬𝐬𝐢𝐨𝐧𝐚𝐭𝐞𝐝 𝐢𝐧 𝐒𝐨𝐟𝐭𝐰𝐚𝐫𝐞 𝐞𝐧𝐠𝐢𝐧𝐞𝐞𝐫𝐢𝐧𝐠. 𝐀 𝐟𝐮𝐥𝐥 𝐬𝐭𝐚𝐜𝐤 𝐬𝐨𝐟𝐭𝐰𝐚𝐫𝐞 𝐝𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫 𝐚𝐧𝐝 𝐚 𝐰𝐞𝐛𝐬𝐢𝐭𝐞 𝐝𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫.𝐈 𝐮𝐧𝐝𝐞𝐫𝐭𝐚𝐧𝐝 𝐦𝐨𝐫𝐞 𝐥𝐚𝐧𝐠𝐮𝐚𝐠𝐞𝐬 𝐭𝐡𝐚𝐧 𝐲𝐨𝐮 𝐝𝐨 𝐚𝐧𝐝 𝐚𝐦 𝐥𝐨𝐨𝐤𝐢𝐠 𝐟𝐨𝐰𝐚𝐫𝐝 𝐭𝐨 𝐥𝐞𝐚𝐫𝐧 𝐧𝐞𝐰 𝐥𝐚𝐧𝐠𝐮𝐚𝐠𝐞𝐬.</p>
+    </div>
+    
+    <div class="button-container">
+        <button class="nav-button" onclick="openPage('biography')">biography<span>See my personal Info</span></button>
+        <button class="nav-button" onclick="openPage('projects')">My projects<span>See what I've built</span></button>
+        <button class="nav-button" onclick="openPage('gallery')">my gallery<span>View my photos</span></button>
+        <button class="nav-button" onclick="openPage('socials')">my socials<span>Connect with me</span></button>
+    </div>
+    
+    <footer>
+        <p>© <a href="https://instagram.com/next_level_mark" target="_blank">next_level_mark</a> 2025</p>
+    </footer>
+    
+    <!-- Biography Page -->
+    <div id="biography" class="page">
+        <button class="close-btn" onclick="closePage('biography')">×</button>
+        <h2>Biography</h2>
+        <div class="bio-text">
+            <p>Full name: Mark</p>
+            <p>Date of birth: 30th January 2008</p>
+            <p>Primary education: Started at St. Erastus Schools LTD</p>
+            <p>Later transferred to Sirende Amani Academy</p>
+            <p>High school: Friends School Kamusinga</p>
+            <p>From an early age, I showed exceptional talent in technology</p>
+            <p>I began coding at the age of 12, starting with simple HTML pages</p>
+            <p>By 14, I had mastered multiple programming languages</p>
+            <p>my passion for software engineering grew exponentially</p>
+            <p>I specializes in full-stack web development</p>
+            <p>He has experience with front-end technologies like HTML, CSS, JavaScript</p>
+            <p>And back-end technologies including Node.js, Python, and PHP</p>
+            <p>His database skills include MySQL, MongoDB, and Firebase</p>
+            <p>Mark is also proficient in mobile app development</p>
+            <p>He has built applications using React Native and Flutter</p>
+            <p>Beyond coding, Mark has a keen interest in cybersecurity</p>
+            <p>He enjoys learning about ethical hacking and network security</p>
+            <p>Mark is known for his problem-solving abilities</p>
+            <p>He approaches challenges with creativity and determination</p>
+            <p>His work ethic is characterized by discipline and attention to detail</p>
+            <p>Mark believes in continuous learning and self-improvement</p>
+            <p>He spends hours daily expanding his knowledge and skills</p>
+            <p>Mark is active in online developer communities</p>
+            <p>He contributes to open-source projects when possible</p>
+            <p>His goal is to become a world-class software architect</p>
+            <p>Mark aspires to create solutions that impact millions of lives</p>
+            <p>He values clean, efficient, and maintainable code</p>
+            <p>Mark follows best practices in software development</p>
+            <p>He is familiar with Agile methodologies and version control</p>
+            <p>Beyond technology, Mark enjoys reading and music</p>
+            <p>He is deeply spiritual and attributes his success to faith</p>
+            <p>Mark maintains a healthy balance between work and personal life</p>
+            <p>He believes in giving back to the community</p>
+            <p>Mark mentors younger students interested in programming</p>
+            <p>His ultimate dream is to establish a tech hub in his hometown</p>
+            <p>Mark envisions creating opportunities for African youth in tech</p>
+            <p>He is determined to leave a lasting legacy in the tech world</p>
+        </div>
+    </div>
+    
+    <!-- Projects Page -->
+    <div id="projects" class="page">
+        <button class="close-btn" onclick="closePage('projects')">×</button>
+        <h2>My Projects</h2>
+        <div class="projects-container">
+            <button class="project-btn" onclick="window.open('https://destiny-date.vercel.app/', '_blank')">𝐒𝐍𝐀𝐊𝐄 𝐆𝐀𝐌𝐄<span>tap to play</span></button>
+            <button class="project-btn" onclick="window.open('https://whatsapp-unban-mocha.vercel.app/', '_blank')">𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 𝐔𝐍𝐁𝐀𝐍<span>WhatsApp unban solution</span></button>
+            <button class="project-btn" onclick="window.open('https://mark-lovd.vercel.app/', '_blank')">𝐓𝐎 𝐌𝐘 𝐋𝐎𝐕𝐄<span>A special creation</span></button>
+            <button class="project-btn" onclick="window.open('https://t-or-d-delta.vercel.app/', '_blank')">𝐓𝐑𝐔𝐓𝐇 𝐎𝐑 𝐃𝐀𝐑𝐄<span>Fun game</span></button>
+            <button class="project-btn" onclick="showBlackScreen()">𝐈𝐍𝐒𝐓𝐀𝐆𝐑𝐀𝐌 𝐁𝐀𝐍<span>Try at your own risk</span></button>
+            <button class="project-btn" onclick="window.open('https://instagram-unban.vercel.app/', '_blank')">𝐈𝐍𝐒𝐓𝐀𝐆𝐑𝐀𝐌 𝐔𝐍𝐁𝐀𝐍<span>Instagram solution</span></button>
+        </div>
+    </div>
+    
+    <!-- Gallery Page -->
+    <div id="gallery" class="page">
+        <button class="close-btn" onclick="closePage('gallery')">×</button>
+        <h2>My Gallery</h2>
+        <p style="margin-top: 50px; font-size: 1.2rem; color: #ff8a00;">Coming soon... Photos will be uploaded here!</p>
+    </div>
+    
+    <!-- Socials Page -->
+    <div id="socials" class="page">
+        <button class="close-btn" onclick="closePage('socials')">×</button>
+        <h2>My Social Media</h2>
+        <div class="socials-container">
+            <button class="social-btn instagram" onclick="window.open('https://instagram.com/next_level_mark', '_blank')">
+                Instagram
+            </button>
+            <button class="social-btn whatsapp" onclick="window.open('https://wa.me/254110550356', '_blank')">
+                WhatsApp
+            </button>
+            <button class="social-btn telegram" onclick="window.open('https://t.me/Next_level_mark', '_blank')">
+                Telegram
+            </button>
+            <button class="social-btn facebook" onclick="window.open('https://facebook.com/MarkWasike', '_blank')">
+                Facebook
+            </button>
+        </div>
+    </div>
+    
+    <!-- Black Screen (for Instagram Ban prank) -->
+    <div id="black-screen">
+        <p>⚠️ WARNING ⚠️<br><br>Your device has been temporarily locked due to suspicious activity detected from your IP address.<br><br>This is a security measure to protect your account.</p>
+        <button onclick="hideBlackScreen()">Unlock Device</button>
+    </div>
+    
+    <script>
+        // Update battery status with animation
+        if ('getBattery' in navigator) {
+            navigator.getBattery().then(function(battery) {
+                updateBatteryInfo(battery);
+                
+                battery.addEventListener('levelchange', function() {
+                    updateBatteryInfo(battery);
+                });
+                
+                battery.addEventListener('chargingchange', function() {
+                    updateBatteryInfo(battery);
+                });
+            });
+        } else {
+            document.getElementById('battery').textContent = 'Battery: API not supported';
+        }
+        
+        function updateBatteryInfo(battery) {
+            const batteryPercent = Math.round(battery.level * 100);
+            let batteryText = batteryPercent + '%';
+            
+            if (battery.charging) {
+                batteryText += ' (⚡ Charging)';
+            }
+            
+            document.getElementById('battery').innerHTML = batteryText + 
+                `<span class="battery-animation"><span class="battery-level" id="battery-level" style="width:${batteryPercent}%"></span></span>`;
+            
+            // Change battery color based on level
+            const batteryLevel = document.getElementById('battery-level');
+            if (batteryPercent <= 20) {
+                batteryLevel.style.background = '#ff4757';
+            } else if (batteryPercent <= 50) {
+                batteryLevel.style.background = '#ffa502';
+            } else {
+                batteryLevel.style.background = '#25D366';
+            }
+        }
+        
+        // Get local IP with animation
+        function getLocalIP() {
+            return new Promise(function(resolve) {
+                const pc = new RTCPeerConnection({iceServers: []});
+                pc.createDataChannel('');
+                pc.createOffer().then(function(offer) {
+                    return pc.setLocalDescription(offer);
+                }).catch(function() {
+                    resolve('Not available');
+                });
+                
+                pc.onicecandidate = function(ice) {
+                    if (!ice || !ice.candidate || !ice.candidate.candidate) {
+                        resolve('Not available');
+                        return;
+                    }
+                    const myIP = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];
+                    resolve(myIP);
+                    pc.onicecandidate = function() {};
+                };
+            });
+        }
+        
+        getLocalIP().then(function(ip) {
+            document.getElementById('ip').textContent = ip;
+            // Add pulsing animation to IP
+            document.getElementById('ip').style.animation = 'ipUnderline 3s infinite';
+        });
+        
+        // Update date and time with animation
+        function updateDateTime() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            };
+            const dateTimeStr = now.toLocaleDateString('en-US', options);
+            
+            // Add flashing colon animation
+            const colon = now.getSeconds() % 2 === 0 ? ':' : ' ';
+            const formattedDateTime = dateTimeStr.replace(':', colon);
+            
+            document.getElementById('datetime').innerHTML = formattedDateTime;
+            
+            // Add color change based on time
+            const hours = now.getHours();
+            if (hours < 6 || hours >= 18) {
+                document.getElementById('datetime').style.color = '#4a8fe7'; // Night blue
+            } else if (hours < 12) {
+                document.getElementById('datetime').style.color = '#ff8a00'; // Morning orange
+            } else {
+                document.getElementById('datetime').style.color = '#e52e71'; // Afternoon pink
+            }
+        }
+        
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+        
+        // Page navigation functions
+        function openPage(pageId) {
+            document.getElementById(pageId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            if (pageId === 'biography') {
+                animateBioText();
+            }
+            
+            // Play background music when any page is opened
+            const music = document.getElementById('bg-music');
+            music.volume = 0.3;
+            music.play().catch(e => console.log('Auto-play prevented:', e));
+        }
+        
+        function closePage(pageId) {
+            document.getElementById(pageId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Animate biography text
+        function animateBioText() {
+            const bioParagraphs = document.querySelectorAll('.bio-text p');
+            let delay = 0;
+            
+            bioParagraphs.forEach((p, index) => {
+                setTimeout(() => {
+                    p.classList.add('visible');
+                }, delay);
+                delay += 150; // 0.15 seconds between each paragraph
+            });
+        }
+        
+        // Instagram Ban prank
+        function showBlackScreen() {
+            document.getElementById('black-screen').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            document.getElementById('bg-music').pause();
+            
+            // Add vibration if supported
+            if ('vibrate' in navigator) {
+                navigator.vibrate([200, 100, 200]);
+            }
+        }
+        
+        function hideBlackScreen() {
+            document.getElementById('black-screen').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.getElementById('bg-music').play();
+        }
+        
+        // Initialize - animate bio text when page loads (for demo)
+        window.onload = function() {
+            // Add floating animation to info container
+            const infoContainer = document.querySelector('.info-container');
+            let floatDirection = 1;
+            setInterval(() => {
+                const currentTransform = getComputedStyle(infoContainer).transform;
+                const currentY = currentTransform === 'none' ? 0 : parseFloat(currentTransform.split(',')[5]);
+                
+                if (Math.abs(currentY) > 8) {
+                    floatDirection *= -1;
+                }
+                
+                infoContainer.style.transform = `translateY(${currentY + floatDirection}px)`;
+            }, 100);
+            
+            // Start with music paused (will play when page opens)
+            document.getElementById('bg-music').volume = 0.3;
+        };
+    </script>
+</body>
+</html>
