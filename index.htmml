@@ -3,380 +3,316 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Song Downloader</title>
+    <title>Queen Omines XMD - WhatsApp Bot</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
-
+        
         body {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             color: #fff;
             min-height: 100vh;
             padding: 20px;
         }
-
+        
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
         }
-
-        header {
+        
+        /* Header with moving text */
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .moving-text {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ff8a00, #e52e71, #9b59b6, #3498db, #2ecc71);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 5s ease infinite, moveText 15s linear infinite;
+            white-space: nowrap;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes moveText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* Bot description */
+        .description {
             text-align: center;
             margin-bottom: 40px;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
-
-        .search-container {
+            padding: 20px;
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
             border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-
-        .input-group {
-            display: flex;
-            margin-bottom: 20px;
+        
+        .description h2 {
+            color: #ff8a00;
+            margin-bottom: 15px;
+            font-size: 28px;
         }
-
-        input {
-            flex: 1;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 50px 0 0 50px;
-            font-size: 1rem;
-            background: rgba(255, 255, 255, 0.9);
-            outline: none;
+        
+        .description p {
+            font-size: 18px;
+            line-height: 1.6;
         }
-
-        button {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 0 50px 50px 0;
-            background: #ff4e50;
-            color: white;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        button:hover {
-            background: #ff6b6b;
-            transform: translateY(-2px);
-        }
-
-        button:disabled {
-            background: #6c757d;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .results-container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            display: none;
-        }
-
-        .results-container h2 {
-            margin-bottom: 20px;
+        
+        /* Bot image */
+        .bot-image {
             text-align: center;
+            margin: 30px 0;
         }
-
-        .result-item {
+        
+        .bot-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s;
+        }
+        
+        .bot-image img:hover {
+            transform: scale(1.03);
+        }
+        
+        /* Setup section */
+        .setup {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .setup h2 {
+            text-align: center;
+            color: #3498db;
+            margin-bottom: 25px;
+            font-size: 26px;
+        }
+        
+        .setup-step {
             display: flex;
             align-items: center;
+            margin-bottom: 25px;
             padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
-
-        .result-item:hover {
-            background: rgba(255, 255, 255, 0.15);
+        
+        .setup-step:hover {
+            background: rgba(255, 255, 255, 0.1);
             transform: translateX(5px);
         }
-
-        .thumbnail {
-            width: 80px;
-            height: 60px;
-            border-radius: 5px;
-            margin-right: 15px;
-            object-fit: cover;
-        }
-
-        .song-info {
-            flex: 1;
-        }
-
-        .song-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .song-duration {
-            opacity: 0.7;
-            font-size: 0.9rem;
-        }
-
-        .download-btn {
-            padding: 10px 20px;
-            border-radius: 50px;
-            background: #4CAF50;
+        
+        .step-number {
+            background: #e52e71;
             color: white;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .download-btn:hover {
-            background: #45a049;
-            transform: scale(1.05);
-        }
-
-        .loading {
-            text-align: center;
-            padding: 20px;
-            display: none;
-        }
-
-        .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top: 4px solid #fff;
             width: 40px;
             height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
         }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        
+        .step-content {
+            flex-grow: 1;
         }
-
-        .error-message {
-            background: rgba(255, 0, 0, 0.2);
-            border-left: 4px solid #ff4e50;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-            display: none;
-        }
-
-        footer {
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 5px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
             text-align: center;
-            margin-top: 40px;
-            opacity: 0.7;
-            font-size: 0.9rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
         }
-
-        @media (max-width: 600px) {
-            .input-group {
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #ff8a00, #e52e71);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(45deg, #3498db, #9b59b6);
+            color: white;
+        }
+        
+        .btn-success {
+            background: linear-gradient(45deg, #2ecc71, #3498db);
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        /* Contact section */
+        .contact {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .contact h2 {
+            color: #2ecc71;
+            margin-bottom: 20px;
+            font-size: 26px;
+        }
+        
+        /* Channel section */
+        .channel {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .channel h2 {
+            color: #9b59b6;
+            margin-bottom: 20px;
+            font-size: 26px;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .buttons-container {
                 flex-direction: column;
             }
             
-            input {
-                border-radius: 50px;
-                margin-bottom: 10px;
+            .btn {
+                width: 100%;
             }
             
-            button {
-                border-radius: 50px;
-            }
-            
-            .result-item {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .thumbnail {
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
-            
-            .song-info {
-                margin-bottom: 10px;
+            .moving-text {
+                font-size: 20px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>YouTube Song Downloader</h1>
-            <p class="subtitle">Download your favorite YouTube songs as MP3 files</p>
-        </header>
+        <div class="header">
+            <h1 class="moving-text">👋 Hello guys 👋 I am QUEEN OMINES XMD 👋</h1>
+        </div>
         
-        <div class="search-container">
-            <div class="input-group">
-                <input type="text" id="searchInput" placeholder="Enter song name or YouTube URL...">
-                <button id="searchBtn">Search</button>
+        <div class="description">
+            <h2>About Queen Omines XMD</h2>
+            <p>I am a pure <strong>JavaScript WhatsApp bot</strong> developed by <strong>NEXT_LEVEL_MARK</strong> 💻.<br>
+            I'm designed to make your WhatsApp not only a messaging platform but also a fun place to chill and remove stress 😂.</p>
+        </div>
+        
+        <div class="bot-image">
+            <img src="https://files.catbox.moe/ca4z8w.jpg" alt="Queen Omines XMD" width="400">
+        </div>
+        
+        <div class="setup">
+            <h2>⚙️ SETTING UP</h2>
+            
+            <div class="setup-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <p>Fork and Star this repo to support the project.</p>
+                    <div class="buttons-container">
+                        <a href="https://github.com/Next-evel-mark/Queen-Omines-xmd/tree/main/fork" target="_blank" class="btn btn-primary">Fork Repository</a>
+                        <a href="https://github.com/Next-evel-mark/Queen-Omines-xmd/tree/main" target="_blank" class="btn btn-secondary">Star Repository</a>
+                    </div>
+                </div>
             </div>
-            <p style="text-align: center; opacity: 0.8; margin-top: 10px;">
-                Powered by MP3Juice
-            </p>
+            
+            <div class="setup-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <p>Get your WhatsApp Session ID</p>
+                    <div class="buttons-container">
+                        <a href="https://pkxmd-pairing-site-pz9c.onrender.com/pair" target="_blank" class="btn btn-success">Get Session ID</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="setup-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <p>Deploy to Heroku</p>
+                    <div class="buttons-container">
+                        <a href="https://heroku.com/deploy?template=https://github.com/Next-evel-mark/Queen-Omines-xmd/tree/main" target="_blank" class="btn btn-primary">Deploy to Heroku</a>
+                    </div>
+                </div>
+            </div>
         </div>
         
-        <div class="loading" id="loadingIndicator">
-            <div class="spinner"></div>
-            <p>Searching for songs...</p>
+        <div class="contact">
+            <h2>📞 Contact Developer</h2>
+            <div class="buttons-container">
+                <a href="https://wa.me/254110550356" target="_blank" class="btn btn-success">Chat on WhatsApp</a>
+            </div>
         </div>
         
-        <div class="error-message" id="errorMessage">
-            An error occurred. Please try again.
+        <div class="channel">
+            <h2>📢 Join Our Channel</h2>
+            <div class="buttons-container">
+                <a href="https://whatsapp.com/channel/0029VavJhrh7tkj8dCeRKh3b" target="_blank" class="btn btn-secondary">Join WhatsApp Channel</a>
+            </div>
         </div>
         
-        <div class="results-container" id="resultsContainer">
-            <h2>Search Results</h2>
-            <div id="resultsList"></div>
+        <div class="footer">
+            <p>Developed with ❤️ by NEXT_LEVEL_MARK</p>
         </div>
-        
-        <footer>
-            <p>Disclaimer: This tool is for personal use only. Please respect copyright laws.</p>
-        </footer>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.getElementById('searchInput');
-            const searchBtn = document.getElementById('searchBtn');
-            const loadingIndicator = document.getElementById('loadingIndicator');
-            const errorMessage = document.getElementById('errorMessage');
-            const resultsContainer = document.getElementById('resultsContainer');
-            const resultsList = document.getElementById('resultsList');
-            
-            // Focus on search input when page loads
-            searchInput.focus();
-            
-            // Search when button is clicked
-            searchBtn.addEventListener('click', performSearch);
-            
-            // Also search when Enter key is pressed
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    performSearch();
-                }
-            });
-            
-            function performSearch() {
-                const query = searchInput.value.trim();
-                
-                if (!query) {
-                    alert('Please enter a song name or YouTube URL');
-                    return;
-                }
-                
-                // Show loading indicator
-                loadingIndicator.style.display = 'block';
-                errorMessage.style.display = 'none';
-                resultsContainer.style.display = 'none';
-                searchBtn.disabled = true;
-                
-                // In a real implementation, you would make an API call to MP3Juice
-                // Since we can't directly access MP3Juice from client-side JavaScript due to CORS,
-                // we'll simulate the behavior with mock data
-                
-                setTimeout(() => {
-                    // Simulate search results
-                    const mockResults = generateMockResults(query);
-                    displayResults(mockResults);
-                    
-                    // Hide loading indicator
-                    loadingIndicator.style.display = 'none';
-                    resultsContainer.style.display = 'block';
-                    searchBtn.disabled = false;
-                }, 1500);
-            }
-            
-            function generateMockResults(query) {
-                // This is mock data - in a real implementation, you would get this from MP3Juice
-                const titles = [
-                    `${query} - Official Audio`,
-                    `${query} - Music Video`,
-                    `Best of ${query} - Full Album`,
-                    `${query} - Acoustic Version`,
-                    `${query} - Live Performance`
-                ];
-                
-                const durations = ['3:45', '4:20', '5:15', '3:30', '6:10'];
-                
-                return titles.map((title, index) => ({
-                    id: index + 1,
-                    title: title,
-                    duration: durations[index],
-                    thumbnail: `https://picsum.photos/80/60?random=${index}`,
-                    downloadUrl: `#${index}`
-                }));
-            }
-            
-            function displayResults(results) {
-                resultsList.innerHTML = '';
-                
-                if (results.length === 0) {
-                    resultsList.innerHTML = '<p style="text-align: center;">No results found. Try a different search term.</p>';
-                    return;
-                }
-                
-                results.forEach(result => {
-                    const resultItem = document.createElement('div');
-                    resultItem.className = 'result-item';
-                    
-                    resultItem.innerHTML = `
-                        <img src="${result.thumbnail}" alt="Thumbnail" class="thumbnail">
-                        <div class="song-info">
-                            <div class="song-title">${result.title}</div>
-                            <div class="song-duration">Duration: ${result.duration}</div>
-                        </div>
-                        <button class="download-btn" data-id="${result.id}">Download</button>
-                    `;
-                    
-                    resultsList.appendChild(resultItem);
-                });
-                
-                // Add event listeners to download buttons
-                document.querySelectorAll('.download-btn').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const id = this.getAttribute('data-id');
-                        downloadSong(id);
-                    });
-                });
-            }
-            
-            function downloadSong(id) {
-                // In a real implementation, this would initiate the download through MP3Juice
-                alert(`Downloading song with ID: ${id}\n\nIn a real implementation, this would download the song using MP3Juice's service.`);
-                
-                // For demonstration purposes, we'll simulate a download
-                const downloadLink = document.createElement('a');
-                downloadLink.href = 'https://www.example.com/sample.mp3'; // This would be the actual download URL from MP3Juice
-                downloadLink.download = `song-${id}.mp3`;
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
-            }
-        });
-    </script>
 </body>
 </html>
