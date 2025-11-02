@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXT_LEVEL_MARK - Christmas Edition</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --christmas-red: #b30000;
+            --christmas-green: #006400;
+            --christmas-gold: #ffd700;
+            --christmas-white: #f5f5f5;
+            --dark-green: #003300;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark-green), #001a00);
+            color: var(--christmas-white);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Christmas decorations */
+        .snowflake {
+            position: absolute;
+            color: white;
+            font-size: 1.5rem;
+            opacity: 0.8;
+            z-index: 1;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        .christmas-lights {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--christmas-red),
+                var(--christmas-red) 10px,
+                var(--christmas-green) 10px,
+                var(--christmas-green) 20px,
+                var(--christmas-gold) 20px,
+                var(--christmas-gold) 30px
+            );
+            z-index: 2;
+            animation: lights 2s linear infinite;
+        }
+
+        @keyframes lights {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .header-decoration {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .tree-left, .tree-right {
+            position: absolute;
+            font-size: 3rem;
+            color: var(--christmas-green);
+            top: 10px;
+        }
+
+        .tree-left {
+            left: 10%;
+        }
+
+        .tree-right {
+            right: 10%;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--christmas-red), var(--christmas-gold), var(--christmas-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .main-title::before, .main-title::after {
+            content: "🎄";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+        }
+
+        .main-title::before {
+            left: -40px;
+        }
+
+        .main-title::after {
+            right: -40px;
+        }
+
+        .info-bar {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            background: rgba(0, 50, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            border: 2px solid var(--christmas-gold);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 10px;
+        }
+
+        .info-item i {
+            margin-right: 10px;
+            color: var(--christmas-gold);
+        }
+
+        .section {
+            background: rgba(0, 50, 0, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border-left: 5px solid var(--christmas-red);
+            border-right: 5px solid var(--christmas-green);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--christmas-red), var(--christmas-gold), var(--christmas-green));
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--christmas-gold);
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 25%;
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--christmas-gold), transparent);
+        }
+
+        .section-content {
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .service-item {
+            background: rgba(0, 80, 0, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+            border: 1px solid var(--christmas-gold);
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            background: rgba(179, 0, 0, 0.3);
+        }
+
+        .service-item i {
+            margin-right: 10px;
+            color: var(--christmas-gold);
+        }
+
+        .social-media {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(0, 80, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            width: 120px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--christmas-white);
+            border: 1px solid var(--christmas-gold);
+        }
+
+        .social-badge:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+            background: rgba(179, 0, 0, 0.3);
+        }
+
+        .social-badge i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .social-badge.instagram i {
+            color: #E1306C;
+        }
+
+        .social-badge.whatsapp i {
+            color: #25D366;
+        }
+
+        .social-badge.email i {
+            color: #EA4335;
+        }
+
+        .social-badge.channel i {
+            color: #075E54;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            border-top: 1px solid var(--christmas-gold);
+            color: var(--christmas-gold);
+            position: relative;
+        }
+
+        footer::before {
+            content: "🎅";
+            position: absolute;
+            left: 10%;
+            top: 0;
+            transform: translateY(-50%);
+            font-size: 2rem;
+        }
+
+        footer::after {
+            content: "🦌";
+            position: absolute;
+            right: 10%;
+            top: 0;
+            transform: translateY(-50%);
+            font-size: 2rem;
+        }
+
+        .gift-icon {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .main-title::before, .main-title::after {
+                display: none;
+            }
+            
+            .info-bar {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .info-item {
+                margin: 8px 0;
+            }
+            
+            .tree-left, .tree-right {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="christmas-lights"></div>
+    
+    <div class="container">
+        <header>
+            <div class="header-decoration">
+                <div class="tree-left">🎄</div>
+                <div class="tree-right">🎄</div>
+            </div>
+            <h1 class="main-title">𝐍𝐄𝐗𝐓_𝐋𝐄𝐕𝐄𝐋_𝐌𝐀𝐑𝐊</h1>
+            <div class="info-bar">
+                <div class="info-item">
+                    <i class="fas fa-network-wired"></i>
+                    <span id="local-ip">Loading IP...</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-battery-half"></i>
+                    <span id="battery-level">Loading battery...</span>
+                </div>
+                <div class="info-item">
+                    <i class="far fa-clock"></i>
+                    <span id="current-time">Loading time...</span>
+                </div>
+                <div class="info-item">
+                    <i class="far fa-calendar-alt"></i>
+                    <span id="current-date">Loading date...</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">𝐀𝐁𝐎𝐔𝐓 𝐌𝐄</h2>
+            <div class="section-content">
+                <p>A cool young man with a passion for technology and innovation. I'm someone who enjoys doing my own things and exploring creative solutions to problems. I'm God-fearing and believe in staying true to my values. My love for tech started at a young age, and at 17 years old, I'm already deeply immersed in the world of programming, web development, and digital solutions. I'm constantly learning and pushing myself to reach new heights in the tech industry.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">𝐍𝐄𝐗𝐓_𝐋𝐄𝐕𝐄𝐋_𝐓𝐄𝐂𝐇𝐍𝐎𝐋𝐎𝐆𝐈𝐄𝐒</h2>
+            <div class="section-content">
+                <p>Next Level Technologies is a cutting-edge tech organization owned by Mark. We specialize in providing comprehensive digital solutions to help businesses and individuals thrive in the online space. Our services range from website and app development to hosting solutions and cybersecurity. We're committed to staying at the forefront of technology trends and delivering exceptional results for our clients.</p>
+                
+                <div class="services-grid">
+                    <div class="service-item"><i class="fas fa-laptop-code"></i> Website Design</div>
+                    <div class="service-item"><i class="fas fa-server"></i> Website Hosting</div>
+                    <div class="service-item"><i class="fas fa-mobile-alt"></i> App Design</div>
+                    <div class="service-item"><i class="fas fa-cloud-upload-alt"></i> App Hosting</div>
+                    <div class="service-item"><i class="fas fa-shield-alt"></i> Virtual Private Servers</div>
+                    <div class="service-item"><i class="fas fa-user-shield"></i> Virtual Private Network</div>
+                    <div class="service-item"><i class="fas fa-wifi"></i> Free Net</div>
+                    <div class="service-item"><i class="fab fa-whatsapp"></i> WhatsApp Bot Development</div>
+                    <div class="service-item"><i class="fas fa-chart-line"></i> Social Media Boost</div>
+                    <div class="service-item"><i class="fas fa-tools"></i> Tech Tricks</div>
+                    <div class="service-item"><i class="fas fa-bolt"></i> Latest Heist</div>
+                    <div class="service-item"><i class="fas fa-money-bill-wave"></i> Money Heists</div>
+                    <div class="service-item"><i class="fas fa-download"></i> Premium Mod APK</div>
+                    <div class="service-item"><i class="fas fa-file-invoice-dollar"></i> Premium Billed APK</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">𝐎𝐔𝐑 𝐒𝐎𝐂𝐈𝐀𝐋 𝐌𝐄𝐃𝐈𝐀</h2>
+            <div class="social-media">
+                <a href="https://instagram.com/next_level_mark" class="social-badge instagram" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://wa.me/254732526095?text=Hello%20sir" class="social-badge whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </a>
+                <a href="https://whatsapp.com/channel/0029Vb7OTRX5vKA89MH4zb2v" class="social-badge channel" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Channel</span>
+                </a>
+                <a href="mailto:marksimiyu050@gmail.com" class="social-badge email" target="_blank">
+                    <i class="far fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2023 Next Level Mark. Wishing you a Merry Christmas and a Happy New Year!</p>
+            <div class="gift-icon">🎁</div>
+        </footer>
+    </div>
+
+    <script>
+        // Create snowflakes
+        function createSnowflakes() {
+            const snowContainer = document.body;
+            const snowflakeCount = 50;
+            
+            for (let i = 0; i < snowflakeCount; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowflake.innerHTML = '❄';
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                snowflake.style.animationDelay = Math.random() * 5 + 's';
+                snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                snowflake.style.opacity = Math.random() * 0.5 + 0.3;
+                snowContainer.appendChild(snowflake);
+            }
+        }
+
+        // Update time and date
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById('current-time').textContent = now.toLocaleTimeString();
+            document.getElementById('current-date').textContent = now.toLocaleDateString();
+        }
+        
+        // Get local IP (this is a simplified version - may not work in all browsers)
+        function getLocalIP() {
+            return new Promise((resolve) => {
+                const pc = new RTCPeerConnection({ iceServers: [] });
+                pc.createDataChannel('');
+                pc.createOffer().then(offer => pc.setLocalDescription(offer));
+                
+                pc.onicecandidate = (ice) => {
+                    if (ice && ice.candidate && ice.candidate.candidate) {
+                        const ip = /([0-9]{1,3}(\.[0-9]{1,3}){3})/.exec(ice.candidate.candidate);
+                        if (ip) {
+                            resolve(ip[1]);
+                        } else {
+                            resolve('192.168.x.x');
+                        }
+                        pc.close();
+                    }
+                };
+            });
+        }
+
+        // Get battery status
+        function getBatteryStatus() {
+            if ('getBattery' in navigator) {
+                navigator.getBattery().then(function(battery) {
+                    function updateBatteryStatus() {
+                        const level = Math.round(battery.level * 100);
+                        document.getElementById('battery-level').textContent = `Battery: ${level}%`;
+                    }
+                    
+                    battery.addEventListener('levelchange', updateBatteryStatus);
+                    updateBatteryStatus();
+                });
+            } else {
+                document.getElementById('battery-level').textContent = 'Battery: API not supported';
+            }
+        }
+
+        // Initialize everything when page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            createSnowflakes();
+            setInterval(updateDateTime, 1000);
+            updateDateTime();
+            
+            getLocalIP().then(ip => {
+                document.getElementById('local-ip').textContent = `Local IP: ${ip}`;
+            }).catch(() => {
+                document.getElementById('local-ip').textContent = 'Local IP: Not available';
+            });
+            
+            getBatteryStatus();
+        });
+    </script>
+</body>
+</html>
